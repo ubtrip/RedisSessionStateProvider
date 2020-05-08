@@ -1,4 +1,4 @@
-﻿//
+//
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 //
@@ -17,9 +17,9 @@ namespace Microsoft.Web.Redis
         public KeyGenerator(string id, string applicationName)
         {
             this.id = id;
-            DataKey = "{" + applicationName + "_" + id + "}_Data";
-            LockKey = "{" + applicationName + "_" + id + "}_Write_Lock";
-            InternalKey = "{" + applicationName + "_" + id + "}_Internal";
+            DataKey = "{Session:" + applicationName + ":" + id + "}:Data";
+            LockKey = "{Session:" + applicationName + ":" + id + "}:Write_Lock";
+            InternalKey = "{Session:" + applicationName + ":" + id + "}:Internal";
         }
 
         public void RegenerateKeyStringIfIdModified(string id, string applicationName)
@@ -27,9 +27,9 @@ namespace Microsoft.Web.Redis
             if (!id.Equals(this.id))
             {
                 this.id = id;
-                DataKey = "{" + applicationName + "_" + id + "}_Data";
-                LockKey = "{" + applicationName + "_" + id + "}_Write_Lock";
-                InternalKey = "{" + applicationName + "_" + id + "}_Internal";
+                DataKey = "{Session:" + applicationName + ":" + id + "}:Data";
+                LockKey = "{Session:" + applicationName + ":" + id + "}:Write_Lock";
+                InternalKey = "{Session:" + applicationName + ":" + id + "}:Internal";
             }
         }
 
